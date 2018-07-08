@@ -6,11 +6,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Super Contador',
       theme: new ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
-      home: new MyHomePage(title: 'Flutter Demo Home Page'),
+      home: new MyHomePage(title: 'Super Contador'),      
     );
   }
 }
@@ -33,30 +34,63 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
+  void _resetCounter() {
+    setState(() {
+      _counter = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      backgroundColor: Colors.amberAccent[200],
       appBar: new AppBar(
         title: new Text(widget.title),
       ),
-      body: new Center(
+      body: new Center(        
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Text(
-              'You have pushed the button this many times:',
-            ),
-            new Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.display3,              
             ),
+            new Padding(
+              padding: EdgeInsets.symmetric(horizontal: 50.0),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: IconButton(
+                      icon: Icon(Icons.thumb_down),
+                      onPressed: _decrementCounter,  
+                      iconSize: 50.00, 
+                      color: Colors.red,                   
+                    )
+                  ),
+                  Expanded(
+                    child: IconButton(
+                      icon: Icon(Icons.thumb_up),
+                      onPressed: _incrementCounter,
+                      iconSize: 50.00,
+                      color: Colors.green,
+                    )
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
+        onPressed: _resetCounter,
+        tooltip: 'Reset',
+        child: new Icon(Icons.clear),
       ),
     );
   }
